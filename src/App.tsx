@@ -1,35 +1,27 @@
-import React from "react";
-import Card, { CardVariant } from "./components/Card";
-import UserList from "./components/UserList";
-import { IUser } from "./types/types";
+import { Routes, Route, NavLink } from "react-router-dom";
+import UserPage from "./components/UserPage";
+import TodosPage from "./components/TodosPage";
+import { BrowserRouter } from "react-router-dom";
+import OtherPage from "./components/OtherPage";
+import UserItemPage from "./components/UserItemPage";
+import TodoItemPage from "./components/TodoItemPage";
 
 const App = () => {
-  const users: IUser[] = [
-    {
-      id: 1,
-      name: "Leanne Graham",
-      email: "Sincere@april.biz",
-      address: {
-        city: "Gwenborough",
-        street: "Kulas Light",
-        zipcode: "92998-3874",
-      },
-    },
-  ];
-
   return (
-    <div>
-      <Card
-        onClick={(num: number) => console.log(`Нажали на карточку, ${num}`)}
-        variant={CardVariant.outlined}
-        width="200px"
-        height="200px"
-      >
-        <button>Кнопка</button>
-        <h1>Start</h1>
-      </Card>
-      <UserList users={users} />
-    </div>
+    <BrowserRouter>
+      <div>
+        <NavLink to="/users">User</NavLink>
+        <NavLink to="/todos">Todos</NavLink>
+        <NavLink to="/other">Other</NavLink>
+      </div>
+      <Routes>
+        <Route path="/users" element={<UserPage />} />
+        <Route path="/todos" element={<TodosPage />} />
+        <Route path="/users/:id" element={<UserItemPage />} />
+        <Route path="/users/:id" element={<TodoItemPage />} />
+        <Route path="/other" element={<OtherPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
